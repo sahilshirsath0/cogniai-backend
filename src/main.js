@@ -37,7 +37,7 @@ class App {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch('http://127.0.0.1:5002/api/auth/login', {
+      const response = await fetch('https://cogniai2.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -77,7 +77,7 @@ class App {
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:5002/api/auth/signup', {
+      const response = await fetch('https://cogniai2.onrender.com/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -101,7 +101,7 @@ class App {
     const code = event.target.code.value;
 
     try {
-      const response = await fetch('http://127.0.0.1:5002/api/auth/verify', {
+      const response = await fetch('https://cogniai2.onrender.com/api/auth/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, code })
@@ -188,7 +188,7 @@ class App {
     data.userId = this.user.id; // Or _id depending on what's stored
 
     try {
-      const response = await fetch('http://127.0.0.1:5002/api/users/profile', {
+      const response = await fetch('https://cogniai2.onrender.com/api/users/profile', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -219,7 +219,7 @@ class App {
     if (!email) return;
 
     try {
-      const response = await fetch(`http://127.0.0.1:5002/api/users/search?email=${email}`);
+      const response = await fetch(`https://cogniai2.onrender.com/api/users/search?email=${email}`);
       const user = await response.json();
 
       if (response.ok) {
@@ -269,7 +269,7 @@ class App {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:5002/api/registrations', {
+      const response = await fetch('https://cogniai2.onrender.com/api/registrations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -283,7 +283,7 @@ class App {
           const membersStr = document.getElementById('teamMembersData').value;
           const members = JSON.parse(membersStr || '[]');
           for (const email of members) {
-            await fetch('http://127.0.0.1:5002/api/teams/invite', {
+            await fetch('https://cogniai2.onrender.com/api/teams/invite', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -320,7 +320,7 @@ class App {
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:5002/api/events', {
+      const response = await fetch('https://cogniai2.onrender.com/api/events', {
         method: 'POST',
         body: formData
       });
@@ -340,7 +340,7 @@ class App {
   async deleteEvent(eventId) {
     if (!confirm('Are you sure?')) return;
     try {
-      const response = await fetch(`http://127.0.0.1:5002/api/events/${eventId}`, {
+      const response = await fetch(`https://cogniai2.onrender.com/api/events/${eventId}`, {
         method: 'DELETE'
       });
       if (response.ok) {
@@ -354,7 +354,7 @@ class App {
 
   async openEditPostModal(eventId) {
     try {
-      const response = await fetch(`http://127.0.0.1:5002/api/events/${eventId}`);
+      const response = await fetch(`https://cogniai2.onrender.com/api/events/${eventId}`);
       const event = await response.json();
       document.getElementById('editEventId').value = event._id;
       document.getElementById('editEventTitle').value = event.title;
@@ -408,7 +408,7 @@ class App {
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:5002/api/events/${data.eventId}`, {
+      const response = await fetch(`https://cogniai2.onrender.com/api/events/${data.eventId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -448,10 +448,10 @@ class App {
 
   async fetchEventAnalysis(eventId) {
     try {
-      const eventRes = await fetch(`http://127.0.0.1:5002/api/events/${eventId}`);
+      const eventRes = await fetch(`https://cogniai2.onrender.com/api/events/${eventId}`);
       const event = await eventRes.json();
 
-      const analRes = await fetch(`http://127.0.0.1:5002/api/admin/analytics?eventId=${eventId}`);
+      const analRes = await fetch(`https://cogniai2.onrender.com/api/admin/analytics?eventId=${eventId}`);
       const analytics = await analRes.json();
 
       this.selectedEventStats = {
@@ -467,7 +467,7 @@ class App {
 
   async respondToInvitation(invId, status) {
     try {
-      const response = await fetch(`http://127.0.0.1:5002/api/teams/invitations/${invId}/respond`, {
+      const response = await fetch(`https://cogniai2.onrender.com/api/teams/invitations/${invId}/respond`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status, userId: this.user.id })
@@ -483,7 +483,7 @@ class App {
 
   async confirmTeam(regId) {
     try {
-      const response = await fetch(`http://127.0.0.1:5002/api/teams/confirm/${regId}`, {
+      const response = await fetch(`https://cogniai2.onrender.com/api/teams/confirm/${regId}`, {
         method: 'POST'
       });
       if (response.ok) {
@@ -538,7 +538,7 @@ class App {
       const invId = urlParams.get('invId');
 
       try {
-        const response = await fetch(`http://127.0.0.1:5002/api/events/${eventId}`);
+        const response = await fetch(`https://cogniai2.onrender.com/api/events/${eventId}`);
         const event = await response.json();
 
         let invitation = null;
@@ -583,7 +583,7 @@ class App {
 
   async fetchTeamInvitations(userId) {
     try {
-      const response = await fetch(`http://127.0.0.1:5002/api/teams/invitations/${userId}`);
+      const response = await fetch(`https://cogniai2.onrender.com/api/teams/invitations/${userId}`);
       return await response.json();
     } catch (error) {
       return [];
@@ -592,7 +592,7 @@ class App {
 
   async fetchEvents(audience = null) {
     try {
-      let url = 'http://127.0.0.1:5002/api/events';
+      let url = 'https://cogniai2.onrender.com/api/events';
       const params = new URLSearchParams();
       if (audience) params.append('audience', audience);
       if (this.filters.isPaid !== null) params.append('isPaid', this.filters.isPaid);
@@ -612,7 +612,7 @@ class App {
 
   async fetchRegistrations(userId) {
     try {
-      const response = await fetch(`http://127.0.0.1:5002/api/registrations/user/${userId}`);
+      const response = await fetch(`https://cogniai2.onrender.com/api/registrations/user/${userId}`);
       return await response.json();
     } catch (error) {
       console.error('Error fetching registrations:', error);
@@ -622,10 +622,10 @@ class App {
 
   async fetchStats() {
     try {
-      const statsRes = await fetch('http://127.0.0.1:5002/api/dashboard/stats');
+      const statsRes = await fetch('https://cogniai2.onrender.com/api/dashboard/stats');
       const stats = await statsRes.json();
 
-      const analRes = await fetch('http://127.0.0.1:5002/api/admin/analytics');
+      const analRes = await fetch('https://cogniai2.onrender.com/api/admin/analytics');
       const analytics = await analRes.json();
 
       return { ...stats, analytics };
@@ -748,7 +748,7 @@ class App {
     btn.disabled = true;
 
     try {
-      const response = await fetch(`http://127.0.0.1:5002/api/events/${eventId}/certificates`, {
+      const response = await fetch(`https://cogniai2.onrender.com/api/events/${eventId}/certificates`, {
         method: 'POST',
         body: formData
       });
