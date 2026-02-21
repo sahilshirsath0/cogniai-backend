@@ -150,7 +150,7 @@ class App {
   }
 
   openModal(type) {
-    alert(`This would open the ${type} creation modal in the full version!`);
+    alert(`This would open the ${type} creation modal in the full version!!`);
   }
 
   showCreatePostModal() {
